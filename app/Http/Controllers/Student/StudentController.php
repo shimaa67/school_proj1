@@ -44,7 +44,7 @@ class StudentController extends Controller
                 return $qur->section->name;
             })
             ->addColumn('gender', function ($qur) {
-                if ($qur->gender == 'f') {
+                if ($qur->gender == 'm') {
                     return '<span class="badge bg-info text-white">ذكر</span>
 ';
                 }
@@ -123,6 +123,7 @@ class StudentController extends Controller
             'email' => $request->email,
             'password' => Hash::make('1234'),
         ]);
+
 
         Student::create([
             'first_name' => $request->first_name,

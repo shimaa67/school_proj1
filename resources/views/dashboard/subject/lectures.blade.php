@@ -5,10 +5,6 @@
 @section('content')
     <main class="page-content">
 
-
-
-
-
         <div class="row">
             <div class="col-12 col-lg-12 col-xl-12 d-flex">
                 <div class="card radius-10 w-100">
@@ -91,6 +87,7 @@
                 data: function(n) {
                     n.id = {{ $subject->id }};
                     n.title = $('#search-title-lecture').val();
+                    n.teacher= $('#search-teacher-lecture').val();
                 }
             },
 
@@ -139,89 +136,5 @@
                 url: '//cdn.datatables.net/plug-ins/1.13.6/i18n/ar.json',
             }
         });
-
-
-
-
-        $(document).ready(function() {
-            $(document).on('click', '.update_btn', function(e) {
-                e.preventDefault();
-                var button = $(this);
-                var name = button.data('name');
-                var email = button.data('email');
-                var phone = button.data('phone');
-                var qual = button.data('qual');
-                var spec = button.data('spec');
-                var gender = button.data('gender');
-                var status = button.data('status');
-                var date_of_birth = button.data('date-of-birth');
-                var hire_date = button.data('hire-date');
-                var id = button.data('id');
-
-                $('#name').val(name);
-                $('#email').val(email);
-                $('#phone').val(phone);
-                $('#gender').val(gender);
-                $('#qual').val(qual);
-                $('#spec').val(spec);
-                $('#status').val(status);
-                $('#date_of_birth').val(date_of_birth);
-                $('#hire_date').val(hire_date);
-                $('#id').val(id);
-            });
-        });
-
-
-        $(document).ready(function() {
-            $(document).on('click', '.active-btn', function(e) {
-                e.preventDefault();
-                var button = $(this);
-                var id = button.data('id');
-                var url = button.data('url');
-                swal({
-                    title: "هل أنت متأكد من العملية ؟",
-                    text: "سيتم تفعيل العنصر المعطل .",
-                    icon: "warning",
-                    buttons: {
-                        cancel: {
-                            text: "إلغاء",
-                            value: null,
-                            visible: true,
-                            className: "custom-cancel-btn",
-                            closeModal: true,
-                        },
-                        confirm: {
-                            text: "احذف",
-                            value: true,
-                            visible: true,
-                            className: "custom-confirm-btn",
-                            closeModal: true,
-                        },
-                    },
-                    dangerMode: false,
-                }).then((willDelete) => {
-                    if (willDelete) {
-                        $.ajax({
-                            url: url,
-                            type: "post",
-                            data: {
-                                id: id,
-                                _token: "{{ csrf_token() }}"
-                            },
-                            success: function(res) {
-                                toastr.success(res.success)
-                                table.draw();
-                            },
-                        });
-                    } else {
-                        toastr.error('تم الغاء عملية التفعيل')
-                    }
-                });
-            })
-        });
-    </script>
-
-
-
-
+        </script>
 @stop
