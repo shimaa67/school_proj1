@@ -15,7 +15,7 @@ class SubjectController extends Controller
     {
         $teachers = Teacher::all();
         $grades = Grade::all();
-        return view('dashboard.subject.index', compact('teachers', 'grades'));
+        return view('dashboard.subjects.index', compact('teachers', 'grades'));
     }
 
     function getdata(Request $request)
@@ -119,7 +119,7 @@ class SubjectController extends Controller
 
       function lectures($id) {
         $subject = Subject::query()->findOrFail($id);
-        return view('dashboard.subject.lectures' , compact('subject'));
+        return view('dashboard.subjects.lectures' , compact('subject'));
     }
 
      function getdataLectures(Request $request)

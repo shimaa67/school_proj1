@@ -20,7 +20,7 @@ return new class extends Migration
             $table->string('spec');
             $table->string('hint_date');
             $table->enum('qual' , ['d','b', 'm','dr']);
-            $table->enum('gender',['f','fm']);
+            $table->enum('gender',['m','fm']);
             $table->enum('status',['active','inactive'])->default('active');
             $table->timestamps();
         });

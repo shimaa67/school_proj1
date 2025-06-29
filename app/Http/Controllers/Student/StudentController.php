@@ -25,7 +25,7 @@ class StudentController extends Controller
     {
         $grades = Grade::all();
         $sections = Section::all();
-        return view('dashboard.student.index', compact('grades', 'sections'));
+        return view('dashboard.students.index', compact('grades', 'sections'));
     }
 
     function getdata(Request $request)
@@ -64,8 +64,8 @@ class StudentController extends Controller
                 $data_attr .= 'data-last_name="' . $qur->last_name . '" ';
                 $data_attr .= 'data-email="' . $qur->user->email . '" ';
                 $data_attr .= 'data-gender="' . $qur->gender . '" ';
-                  $data_attr .= 'data-date-of-birth="' . $qur->date_of_birth . '" ';
-                   $data_attr .= 'data-parent_name="' . $qur->parent_name . '" ';
+                $data_attr .= 'data-date-of-birth="' . $qur->date_of_birth . '" ';
+                $data_attr .= 'data-parent_name="' . $qur->parent_name . '" ';
                 $data_attr .= 'data-parent_phone="' . $qur->parent_phone . '" ';
                 $data_attr .= 'data-grade="' . $qur->grade->tag. '" ';
                 $data_attr .= 'data-section="' . $qur->section->name . '" ';

@@ -44,5 +44,10 @@ class DatabaseSeeder extends Seeder
         //     'stage_id'=>$stagep,
         //     'tag'=>'12',
         // ]);
+
+
+    \App\Models\User::where('email', 'admin@gmail.com')->update(['role' => 'admin']);
+
+
     }
 }

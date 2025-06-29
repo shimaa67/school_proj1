@@ -12,34 +12,33 @@ use Yajra\DataTables\Facades\DataTables;
 
 class TeacherController extends Controller
 {
-   function index()
+    function index()
     {
 
 
-         return view('dashboard.teacher.index');
+        return view('dashboard.teachers.index');
     }
 
-  function getdata(Request $request)
+    function getdata(Request $request)
     {
- // name , phone , email store in table teacher
-        $grades = Teacher::select('teachers.*' , 'users.email')->join('users' , 'users.id' , '=' , 'teachers.user_id');
+        // name , phone , email store in table teacher
+        $grades = Teacher::select('teachers.*', 'users.email')->join('users', 'users.id', '=', 'teachers.user_id');
 
         return DataTables::of($grades)
             ->filter(function ($qur) use ($request) {
-                if($request->get('name')){
+                if ($request->get('name')) {
                     // like %...% , %.. , ..%
-                 $qur->where('name' , 'like' , '%' .  $request->get('name') . '%');
+                    $qur->where('teachers.name', 'like', '%' .  $request->get('name') . '%');
                 }
 
-                if($request->get('phone' )){
-                 $qur->where('phone' , 'like' , '%' .  $request->get('phone') . '%');
+                if ($request->get('phone')) {
+                    $qur->where('phone', 'like', '%' .  $request->get('phone') . '%');
                 }
 
 
-                if($request->get('email')){
-                     $qur->where('users.email' , 'like' , '%' . $request->get('email') . '%');
+                if ($request->get('email')) {
+                    $qur->where('users.email', 'like', '%' . $request->get('email') . '%');
                 }
-
             })
             ->addIndexColumn()
             ->addColumn('email', function ($qur) {
@@ -58,10 +57,12 @@ class TeacherController extends Controller
             })
             ->addColumn('gender', function ($qur) {
                 if ($qur->gender == 'm') {
-                    return '<span class="badge bg-info text-white">ذكر</span>
+
+                return '<span class="badge bg-info text-white">ذكر</span>
 ';
                 }
-                return '<span class="badge text-white" style="background-color:#c74375;">انثى</span>
+
+                    return '<span class="badge text-white" style="background-color:#c74375;">انثى</span>
 ';
             })
             ->addColumn('action', function ($qur) {
@@ -96,13 +97,13 @@ class TeacherController extends Controller
 
     function add(Request $request)
     {
-          $request->validate([
+        $request->validate([
             'name'   => ['required', 'string', 'max:255'],
             'email'  => ['required', 'email', 'max:255', 'unique:users,email'],
             'phone'  => ['required',  'unique:teachers,phone'],
             'qual'   => ['required', 'in:d,b,m,dr'],
             'spec'   => ['required', 'string', 'max:255'],
-            'gender' => ['required', 'in:m,fm'],
+            'gender' => ['required'],
             'hint_date' => ['required', 'date',],
         ], [
             'name.required'     => 'الاسم مطلوب.',
@@ -137,7 +138,7 @@ class TeacherController extends Controller
         ]);
 
         Teacher::create([
-            'email'=>$request->email,
+            'email' => $request->email,
             'name' => $request->name,
             'qual' => $request->qual,
             'spec' => $request->spec,
@@ -151,7 +152,7 @@ class TeacherController extends Controller
         ]);
     }
 
-     function update(Request $request)
+    function update(Request $request)
     {
         $teacher = Teacher::query()->findOrFail($request->id);
         $user = User::query()->findOrFail($teacher->user_id);
@@ -163,8 +164,8 @@ class TeacherController extends Controller
             'qual'   => ['required', 'in:d,b,m,dr'],
             'status'   => ['required', 'in:active,inactive'],
             'spec'   => ['required', 'string', 'max:255'],
-            'gender' => ['required', 'in:m,fm'],
-            'hint_date' => ['required', 'date', 'after:gender'],
+            'gender' => ['required'],
+            'hint_date' => ['required', 'date'],
         ], [
             'name.required'     => 'الاسم مطلوب.',
             'name.string'       => 'الاسم يجب أن يكون نصاً.',
@@ -190,8 +191,6 @@ class TeacherController extends Controller
 
 
             'hint_date.required'  => 'تاريخ التعيين مطلوب.',
-            'hint_date.date'      => 'صيغة تاريخ التعيين غير صحيحة.',
-            'hint_date.after'     => 'تاريخ التعيين يجب أن يكون بعد  الجنس.',
         ]);
 
         $user->update([
@@ -214,7 +213,7 @@ class TeacherController extends Controller
         ]);
     }
 
-     function delete(Request $request)
+    function delete(Request $request)
     {
 
         $teacher = Teacher::query()->findOrFail($request->id);
@@ -240,6 +239,4 @@ class TeacherController extends Controller
             'success' => 'تمت العملية بنجاح'
         ]);
     }
-
-
 }

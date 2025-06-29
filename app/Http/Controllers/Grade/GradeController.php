@@ -14,7 +14,7 @@ class GradeController extends Controller
 {
     function index()
     {
-        return view('dashboard.grade.index');
+        return view('dashboard.grades.index');
     }
 
     function getdata(Request $request)

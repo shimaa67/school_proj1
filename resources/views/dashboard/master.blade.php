@@ -123,12 +123,9 @@
                     <li><hr class="dropdown-divider"></li>
                     <li>
                       <a class="dropdown-item" href="authentication-signup-with-header-footer.html">
-                        <form action="" method="post">
-                             <div class="d-flex align-items-center">
+                         <div class="d-flex align-items-center">
                            <div class=""><i class="bi bi-lock-fill"></i></div>
                            <div class="ms-3"><span>Logout</span></div>
-                        </form>
-
                          </div>
                        </a>
                     </li>
@@ -470,7 +467,7 @@
               <img src="{{asset('assets/images/logo-icon.png')}}" class="logo-icon" alt="logo icon">
             </div>
             <div>
-              <h4 class="logo-text"> School</h4>
+              <h4 class="logo-text">Snacked</h4>
             </div>
             <div class="toggle-icon ms-auto"> <i class="bi bi-list"></i>
             </div>
@@ -535,6 +532,7 @@
             var data = new FormData(this);
             var url = $(this).attr('action');
             var type = $(this).attr('method');
+            //alert('ahmed')
             // name=ali&gender=1&...
             $.ajax({
                 url: url,

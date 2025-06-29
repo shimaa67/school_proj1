@@ -16,7 +16,7 @@ class LectureController extends Controller
     {
         $subjects = Subject::all();
         $teachers = Teacher::all();
-        return view('dashboard.lecture.index', compact('subjects', 'teachers'));
+        return view('dashboard.lectures.index', compact('subjects', 'teachers'));
     }
 
     function getdata(Request $request)
@@ -100,7 +100,7 @@ class LectureController extends Controller
     }
 
 
-    
+
     function update(Request $request)
     {
     $lecture = Lucture::findOrFail($request->id);

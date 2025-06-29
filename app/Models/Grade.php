@@ -9,9 +9,17 @@ class Grade extends Model
 {
      use HasFactory;
     protected $guarded = [] ;
+
     function stage(){
         return $this->belongsTo(Stage::class);
     }
+
+    public function subject(){
+        return $this->hasMany(Subject::class);
+    }
+
+
+
 
     public static function getStatusByCode($status){
         if($status=='1'){

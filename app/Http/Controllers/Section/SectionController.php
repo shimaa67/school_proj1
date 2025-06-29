@@ -14,7 +14,7 @@ class SectionController extends Controller
     {
         $section = Section::query()->where('status', 'inactive')->get();
         // dd($section);
-        return view('dashboard.section.index');
+        return view('dashboard.sections.index');
     }
 
     function getdata(Request $request)
